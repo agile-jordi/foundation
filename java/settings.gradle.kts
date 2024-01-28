@@ -13,4 +13,4 @@ fun includeAllIn(vararg folders: String) =
             }
     }
 
-includeAllIn("libs", "apps")
+includeAllIn("libs", "apps", "components")

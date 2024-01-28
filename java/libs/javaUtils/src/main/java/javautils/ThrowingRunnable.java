@@ -1,15 +1,17 @@
 package javautils;
 
 @FunctionalInterface
-public interface ThrowingRunnable {
-  void run() throws Exception;
+public interface ThrowingRunnable extends Runnable {
+  void runChecked() throws Exception;
 
-  static void runOrThrow(ThrowingRunnable f){
-    attempt(f);
+  @Override
+  default void run() {
+    runUnchecked(this);
   }
-  static void attempt(ThrowingRunnable f) {
+
+  static void runUnchecked(@NotNull final ThrowingRunnable f) {
     try {
-      f.run();
+      f.runChecked();
     } catch (RuntimeException e) {
       throw e;
     } catch (Exception e) {

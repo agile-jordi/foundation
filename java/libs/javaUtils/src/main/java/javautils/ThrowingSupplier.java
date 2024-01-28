@@ -1,19 +1,18 @@
 package javautils;
 
+import java.util.function.Supplier;
+
 @FunctionalInterface
-public interface ThrowingSupplier<T> {
-  T get() throws Exception;
-  default T unsafeGet(){
-    return getOrThrow(this);
+public interface ThrowingSupplier<T> extends Supplier<T> {
+  T getChecked() throws Exception;
+
+  @Override default T get() {
+    return getUnchecked(this);
   }
 
-  static <A> A getOrThrow(ThrowingSupplier<A> f) {
-    return attempt(f);
-  }
-
-  static <A> A attempt(ThrowingSupplier<A> f) {
+  static <A> A getUnchecked(@NotNull final ThrowingSupplier<A> f) {
     try {
-      return f.get();
+      return f.getChecked();
     } catch (RuntimeException e) {
       throw e;
     } catch (Exception e) {
