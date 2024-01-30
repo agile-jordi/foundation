@@ -1,5 +1,7 @@
 package javautils;
 
+import static javautils.ThrowingSupplier.getUnchecked;
+
 @FunctionalInterface
 public interface ThrowingRunnable extends Runnable {
   void runChecked() throws Exception;
@@ -9,14 +11,14 @@ public interface ThrowingRunnable extends Runnable {
     runUnchecked(this);
   }
 
+  default @NotNull ThrowingSupplier<Unit> asSupplier(){
+    return () -> {
+      runChecked();
+      return Unit.unit;
+    };
+  }
   static void runUnchecked(@NotNull final ThrowingRunnable f) {
-    try {
-      f.runChecked();
-    } catch (RuntimeException e) {
-      throw e;
-    } catch (Exception e) {
-      throw new RuntimeException(e);
-    }
+    getUnchecked(f);
   }
 
 }

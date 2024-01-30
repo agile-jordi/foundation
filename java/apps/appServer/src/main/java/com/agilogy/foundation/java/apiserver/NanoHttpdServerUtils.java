@@ -5,7 +5,9 @@ import com.agilogy.routing.RoutingBuilder;
 import com.agilogy.routing.request.HttpRequest;
 import fi.iki.elonen.NanoHTTPD;
 import fi.iki.elonen.NanoHTTPD.IHTTPSession;
+import static fi.iki.elonen.NanoHTTPD.MIME_PLAINTEXT;
 import fi.iki.elonen.NanoHTTPD.Response;
+import static fi.iki.elonen.NanoHTTPD.newFixedLengthResponse;
 import javautils.NotNull;
 import static javautils.ThrowingRunnable.runUnchecked;
 
@@ -33,5 +35,11 @@ public class NanoHttpdServerUtils {
       }
     };
     runUnchecked(() -> server.start(NanoHTTPD.SOCKET_READ_TIMEOUT, daemon));
+  }
+
+  static @NotNull Response redirect(@NotNull final String uri) {
+    final var result = newFixedLengthResponse(Response.Status.REDIRECT_SEE_OTHER, MIME_PLAINTEXT, "");
+    result.addHeader("Location", uri);
+    return result;
   }
 }

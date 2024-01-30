@@ -3,6 +3,7 @@ plugins {
 }
 
 dependencies {
+    implementation(project(":components:domain"))
     implementation(project(":libs:javaUtils"))
     implementation(project(":libs:routing"))
     implementation(project(":libs:handlebars"))
@@ -12,4 +13,8 @@ dependencies {
     implementation("org.jboss.resteasy:resteasy-undertow-cdi:6.2.7.Final")
     implementation("org.jboss.resteasy:resteasy-multipart-provider:6.2.7.Final")
     implementation("org.nanohttpd:nanohttpd:2.3.1")
+
+    val undertowVersion = "2.3.10.Final"
+    implementation("io.undertow:undertow-core:$undertowVersion")
+    implementation("io.undertow:undertow-servlet:$undertowVersion")
 }

@@ -10,6 +10,10 @@ public interface ThrowingSupplier<T> extends Supplier<T> {
     return getUnchecked(this);
   }
 
+  static Unit getUnchecked(@NotNull final ThrowingRunnable f) {
+    return getUnchecked(f.asSupplier());
+  }
+
   static <A> A getUnchecked(@NotNull final ThrowingSupplier<A> f) {
     try {
       return f.getChecked();
