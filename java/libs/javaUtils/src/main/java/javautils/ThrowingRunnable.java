@@ -1,6 +1,7 @@
 package javautils;
 
 import static javautils.ThrowingSupplier.getUnchecked;
+import org.jetbrains.annotations.NotNull;
 
 @FunctionalInterface
 public interface ThrowingRunnable extends Runnable {

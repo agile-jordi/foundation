@@ -1,6 +1,6 @@
 package com.agilogy.foundation.java.domain;
 
-import javautils.NotNull;
+import org.jetbrains.annotations.NotNull;
 
 import java.time.Instant;
 

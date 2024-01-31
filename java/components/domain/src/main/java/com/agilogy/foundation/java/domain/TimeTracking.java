@@ -1,8 +1,11 @@
 package com.agilogy.foundation.java.domain;
 
-import javautils.NotNull;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 
 public interface TimeTracking {
 
   void addTimeEntries(@NotNull final TimeEntry... entries);
+  List<TimeEntry> listTimeEntries();
 }

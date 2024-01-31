@@ -14,3 +14,5 @@ fun includeAllIn(vararg folders: String) =
     }
 
 includeAllIn("libs", "apps", "components")
+
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")

@@ -1,5 +1,7 @@
 package javautils;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.function.Supplier;
 
 @FunctionalInterface
