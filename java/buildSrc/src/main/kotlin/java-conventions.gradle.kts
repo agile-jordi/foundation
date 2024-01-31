@@ -12,7 +12,7 @@ repositories {
 
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_21
 }
 
 tasks.withType<Test> {
@@ -22,4 +22,15 @@ tasks.withType<Test> {
 // Enable deprecation messages when compiling Java code
 tasks.withType<JavaCompile>().configureEach {
     options.compilerArgs.add("-Xlint:deprecation")
+}
+
+dependencies {
+    implementation("org.jetbrains:annotations:24.0.0")
+    testImplementation(platform("org.junit:junit-bom:5.10.1"))
+    testImplementation("org.junit.jupiter:junit-jupiter")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+}
+
+tasks.named<Test>("test") {
+    useJUnitPlatform()
 }
