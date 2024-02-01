@@ -10,7 +10,6 @@ repositories {
     mavenCentral()
 }
 
-
 java {
     sourceCompatibility = JavaVersion.VERSION_21
 }

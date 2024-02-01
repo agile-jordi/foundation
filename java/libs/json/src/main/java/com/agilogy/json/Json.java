@@ -41,7 +41,7 @@ public sealed interface Json {
   }
 
   default @NotNull java.lang.String asString() {
-    return JsonCodec.serialize(this);
+    return ((JsonEncoder<Json>) JsonCodec::encodeJson).encode(this);
   }
 
   final class Object implements Json, Iterable<Map.Entry<java.lang.String, Json>> {

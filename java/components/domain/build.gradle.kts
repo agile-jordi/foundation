@@ -3,5 +3,5 @@ plugins {
 }
 
 dependencies {
-    implementation(project(":libs:javaUtils"))
+    implementation(projects.libs.javaUtils)
 }

@@ -1,8 +1,8 @@
 plugins {
-    id("java-conventions")
+    id("library-conventions")
 }
 
 dependencies {
-    implementation(project(":libs:javaUtils"))
+    implementation(projects.libs.javaUtils)
     implementation("com.github.jknack:handlebars:4.3.1")
 }
