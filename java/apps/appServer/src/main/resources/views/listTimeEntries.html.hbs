@@ -1,0 +1,30 @@
+{{#partial "content" }}
+
+    <div class="row">
+        <h2>List of time entries</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Developer</th>
+                <th>Project</th>
+                <th>Date</th>
+                <th>Start</th>
+                <th>Duration</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#each timeEntries}}
+                <tr>
+                    <td>{{employeeId}}</td>
+                    <td>{{projectId}}</td>
+                    <td>{{startDate}}</td>
+                    <td>{{startTime}}</td>
+                    <td>{{humanDuration}}</td>
+                </tr>
+            {{/each}}
+            </tbody>
+        </table>
+    </div>
+
+{{/partial}}
+{{> views/base title="Agilogy Time Tracker"}}

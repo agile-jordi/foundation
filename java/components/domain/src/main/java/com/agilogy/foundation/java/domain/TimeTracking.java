@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface TimeTracking {
 
-  void addTimeEntries(@NotNull final TimeEntry... entries);
-  List<TimeEntry> listTimeEntries();
+  void addTimeEntries(final @NotNull List<TimeEntry> entries);
+  @NotNull List<TimeEntry> listTimeEntries();
 }
