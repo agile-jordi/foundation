@@ -1,47 +1,27 @@
 {{#partial "content" }}
-
-    <div class="row">
-        <form class="col s12" action="uploadTimeEntries" method="POST" enctype="multipart/form-data">
-            <div class="row">
-                <div class="input-field">
-                    <select id="employeeId" name="employeeId" class="validate">
-                        <option value="Jordi" selected>Jordi</option>
-                        <option value="Jose">Jose</option>
-                        <option value="Victor">Victor</option>
-                    </select>
-                    <label for="employeeId">Employee</label>
-                </div>
-            </div>
-            <div class="row">
-                <label for="timeEntries" class="active">Time Entries</label>
-                <div class="file-field input-field">
-                    <div class="btn">
-                        <span>Browse</span>
-                        <input type="file" name="timeEntries" class="validate {{#if error}}invalid{{/if}}"/>
-                        <i class="material-icons right">upload_file</i>
-                    </div>
-
-                    <div class="file-path-wrapper">
-                        <input id="timeEntries" class="file-path validate {{#if error}}invalid{{/if}}" type="text"
-                               placeholder="Upload file" value="{{fileName}}"/>
-                        {{#if error}}<p class="error">{{error}}</p>{{/if}}
-                    </div>
-
-                </div>
-            </div>
-            <div class="row">
-
-                <button class="btn waves-effect waves-light" type="submit" name="action">Submit
-                    <i class="material-icons right">send</i>
-                </button>
-            </div>
-        </form>
-    </div>
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      var elems = document.querySelectorAll('select');
-      var instances = M.FormSelect.init(elems, []);
-    });
-    </script>
+    <form class="col s12" action="uploadTimeEntries" method="POST" enctype="multipart/form-data">
+        <p class="pure-g">
+        <span class="pure-u-1-2">
+            <label for="employeeId">Employee</label>
+            <select id="employeeId" name="employeeId" class="validate">
+                <option value="Jordi" selected>Jordi</option>
+                <option value="Jose">Jose</option>
+                <option value="Victor">Victor</option>
+            </select>
+        </span>
+        <span class="pure-u-1-2">
+            <label for="week">Week</label>
+            <input type="week" name="week" class="validate" value="{{week}}">
+        </span>
+        </p>
+        <p>
+            <label for="timeEntries" class="active">Time Entries</label>
+            <input type="file" name="timeEntries" class="validate {{#if error}}invalid{{/if}}">
+        </p>
+        {{#if error}}<p class="error">{{error}}</p>{{/if}}
+        <p>
+            <button type="submit" name="action">Submit</button>
+        </p>
+    </form>
 {{/partial}}
 {{> views/base title="Agilogy Time Tracker"}}

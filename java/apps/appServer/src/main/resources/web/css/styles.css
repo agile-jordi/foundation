@@ -1,4 +1,146 @@
-p.error{
-    color: hsl(348deg,86%,61%);
-    font-size: 0.75 em;
+<!-- Inspired by https://themes.pixelwars.org/read-wp/web-design-is-95-typography/ -->
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+html {
+    font-family: "Lora", Georgia, serif;
+}
+body {
+  --mainWidth: 80%;
+  --width-1-8: 12.5%;
+  --widht-2-8: 25%;
+  --width-3-8: 37.5%;
+  --width-4-8: 50%;
+  --width-5-8: 62.5%;
+  --width-6-8: 75%;
+  --width-7-8: 87.5%;
+  --width-1: 100%;
+  line-height: 1.6;
+  color: #444;
+}
+.width-1-8 { width: var(--width-1-8); display:inline-block; }
+.width-2-8 { width: var(--width-2-8); display:inline-block; }
+.width-3-8 { width: var(--width-3-8); display:inline-block; }
+.width-4-8 { width: var(--width-4-8); display:inline-block; }
+.width-5-8 { width: var(--width-5-8); display:inline-block; }
+.width-6-8 { width: var(--width-6-8); display:inline-block; }
+.width-7-8 { width: var(--width-7-8); display:inline-block; }
+.width-1 { width: var(--width-1); display:inline-block; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Coustard", Georgia, serif;
+  line-height: 1.5;
+  font-weight: 400;
+}
+h1 { font-size: 2.20em; margin: 0.8em 0 0.4em 0; text-align: center; }
+h2 { font-size: 1.60em; margin: 1.4em 0 0.8em 0; }
+h3 { font-size: 1.20em; margin: 1.0em 0; }
+h4 { font-size: 0.90em; margin: 1.0em 0; padding-left: .8em; border-left: 4px solid #ccc; text-transform: uppercase; }
+h5 { font-size: 0.90em; margin: 1.0em 0 .8em 0; }
+h6 { font-size: 0.85em; margin: 1.0em 0 .8em 0; }
+p {
+  margin: 1.2em 0;
+}
+#header {
+    width: var(--mainWidth);
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+main {
+  width: var(--mainWidth);
+  margin: 0 auto;
+  padding: 20px;
+  max-width: 780px;
+  margin-left: auto;
+  margin-right: auto;
+}
+table {
+  font-size: .9em;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+table.centered{
+  margin: 0 auto;
+}
+tr th {
+  padding: .6em 2em .4em 0;
+  border-bottom: 2px solid #555;
+  text-transform: uppercase;
+}
+tr td {
+  color: #666;
+  padding: .8em 2em .6em 0;
+  border-bottom: 1px solid #eee;
+}
+hr {
+  padding: .6em 0 1em 0;
+  outline: 0;
+  border-width: 0 0 1px 0;
+  border-style: dashed;
+  border-color: #ccc;
+}
+ol, ul {
+  margin: .2em 0 1em 0;
+  padding-left: 1em;
+}
+ul li {
+    list-style-type: none;
+}
+ul li:before {
+    content: "-";
+    width: 1.8em;
+    display: inline-block;
+    text-align: left;
+}
+form label {
+  display: block;
+  margin-bottom: .4em;
+  /* font-weight: bold; */
+}
+
+/* TODO: Use https://codepen.io/NielsVoogt/pen/eYBQpPR */
+
+input:not([type="submit"]):not([type="button"]):not([type="radio"]):not([type="checkbox"]), textarea, select {
+  padding: .7em;
+  max-width: 100%;
+  font-size: .9em;
+  color: #444;
+  border: 1px solid #ddd;
+  border-radius: 0;
+  background: #fff;
+  box-sizing: border-box;
+  display:inline-block;
+  width: calc(100% - 1em); /* Use purecss grids to set the width */
+  height: 2.75rem;
+}
+
+input::file-selector-button {
+    padding: 0 1em;
+    border: none transparent;
+    background-color: #e6e6e6;
+    text-decoration: none;
+    border-radius: 2px;
+    margin: 0 1em 0 0;
+    height: 2.75rem;
+}
+
+input::file-selector-button, input[type="submit"], input[type="button"], button, a.button{
+    position: relative;
+    padding: .8em 2em .7em;
+    font-size: .9em;
+    line-height: 1.2;
+    border: 0;
+    outline: 0;
+    border-radius: 0;
+    cursor: pointer;
+}
+input[type="submit"], input[type="button"], button, a.button{
+    color: #fff;
+    background: #333;
+}
+input[type="file"]{
+  padding:0 !important;
 }
