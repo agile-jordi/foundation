@@ -1,27 +1,32 @@
 {{#partial "content" }}
-    <form class="col s12" action="uploadTimeEntries" method="POST" enctype="multipart/form-data">
-        <p class="pure-g">
-        <span class="pure-u-1-2">
-            <label for="employeeId">Employee</label>
-            <select id="employeeId" name="employeeId" class="validate">
-                <option value="Jordi" selected>Jordi</option>
-                <option value="Jose">Jose</option>
-                <option value="Victor">Victor</option>
+    <!-- TODO: Try to generalize client side validation with https://developer.mozilla.org/en-US/docs/Learn/Forms/Form_validation -->
+    <form novalidate class="col s12" action="uploadTimeEntries" method="POST" enctype="multipart/form-data">
+        <fieldset class="pure-g">
+        <label class="pure-u-1-2">
+            Employee
+            <select required id="employeeId" name="employeeId">
+                <option value="" >Select an employee</option>
+                <option value="Jordi" {{#eq employeeId 'Jordi'}}selected{{/eq}}>Jordi</option>
+                <option value="Jose" {{#eq employeeId 'Jose'}}selected{{/eq}}>Jose</option>
+                <option value="Victor" {{#eq employeeId 'Victor'}}selected{{/eq}}>Victor</option>
             </select>
-        </span>
-        <span class="pure-u-1-2">
-            <label for="week">Week</label>
-            <input type="week" name="week" class="validate" value="{{week}}">
-        </span>
-        </p>
-        <p>
-            <label for="timeEntries" class="active">Time Entries</label>
-            <input type="file" name="timeEntries" class="validate {{#if error}}invalid{{/if}}">
-        </p>
-        {{#if error}}<p class="error">{{error}}</p>{{/if}}
-        <p>
+        </label>
+        <label class="pure-u-1-2">
+            Week
+            <input type="week" name="week" value="{{week}}">
+        </label>
+        </fieldset>
+        <label for="timeEntries">
+            Time Entries
+            <input required type="file" name="timeEntries">
+            {{#if error}}<small class="error">{{error}}</small>{{/if}}
+        </label>
+        <fieldset>
             <button type="submit" name="action">Submit</button>
-        </p>
+        </fieldset>
     </form>
+    <script>
+        prepareForms();
+    </script>
 {{/partial}}
 {{> views/base title="Agilogy Time Tracker"}}

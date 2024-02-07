@@ -2,6 +2,7 @@ package com.agilogy.handlebars;
 
 import com.github.jknack.handlebars.Handlebars;
 import com.github.jknack.handlebars.Template;
+import com.github.jknack.handlebars.helper.ConditionalHelpers;
 import org.jetbrains.annotations.NotNull;
 import javautils.ThrowingSupplier;
 
@@ -15,6 +16,7 @@ public final class HandlebarsTemplates {
 
   public HandlebarsTemplates() {
     this.handlebars = new Handlebars();
+    handlebars.registerHelper("eq", ConditionalHelpers.eq);
   }
 
   public @NotNull String render(@NotNull final String viewName) {

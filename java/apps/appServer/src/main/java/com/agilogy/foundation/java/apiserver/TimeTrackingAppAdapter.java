@@ -55,7 +55,15 @@ public final class TimeTrackingAppAdapter {
         });
       });
       path("/listTimeEntries", () -> {
-        get(ctx -> html(ctx, 200, "listTimeEntries.html", Map.of("timeEntries", timeTracking.listTimeEntries().stream().map(t -> t.roundToMinutes()).toList())));
+        get(ctx -> html(
+              ctx,
+              200,
+              "listTimeEntries.html",
+              Map.of(
+                    "timeEntries",
+                    timeTracking.listTimeEntries().stream().map(t -> t.roundToMinutes()).toList()
+              )
+        ));
       });
     };
   }
