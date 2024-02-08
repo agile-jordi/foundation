@@ -87,7 +87,7 @@ ul li::marker {
 /* -- Forms -------------------- */
 /* TODO: Use https://codepen.io/NielsVoogt/pen/eYBQpPR ? */
 
-form label {
+form label, form legend {
   display: block;
   margin: 0.5em 0;
   /* font-weight: bold; */
@@ -98,15 +98,21 @@ form label>small {
 }
 
 
-form label>small.error {
+form small.error  {
   color: red;
 }
 
 /* input.validated:invalid: Don't show validation errors up front, but just when the user has interacted with the input */
-/* TODO: Validation in textareas, option groups, etc */
-label:has(small.error,input.validated:invalid) {
+/* TODO: Validation of radios, checkboxes, etc */
+label:has(>small.error,>.validated:invalid) {
     color: red;
 }
+
+/* Radio groups have a label for the group. The label for the individual radio buttons does not get red when invalid. */
+label:has(>[type="radio"]) {
+    color: initial !important;
+}
+
 
 form fieldset {
   margin: 0;
@@ -125,8 +131,15 @@ input:not([type="submit"]):not([type="button"]):not([type="radio"]):not([type="c
   box-sizing: border-box;
   display:inline-block;
   width: calc(100% - 1em); /* Use purecss grids to set the width */
-  height: 2.75rem;
   margin-top: 0.4em;
+}
+
+input:not([type="submit"]):not([type="button"]):not([type="radio"]):not([type="checkbox"]), select {
+  height: 2.75rem;
+}
+
+textarea {
+  resize: vertical;
 }
 
 input::file-selector-button {

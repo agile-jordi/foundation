@@ -1,15 +1,20 @@
+function errorMessageElement(input) {
+    var parentNode = input.type=='radio' ? input.parentNode.parentNode : input.parentNode;
+    var result = parentNode.querySelector('small');
+    if(!result) {
+        result = document.createElement('small');
+        parentNode.appendChild(result);
+    }
+    return result;
+}
+
 function prepareForms() {
     var forms = document.querySelectorAll('form');
     console.log("Setting up forms", Array.prototype.slice.call(forms));
     forms.forEach((form) => {
         form.novalidate = true;
         Array.from(form.elements).forEach((input) => {
-            var errorMessage = input.parentNode.querySelector('small');
-            if(!errorMessage) {
-                errorMessage = document.createElement('small');
-                input.parentNode.appendChild(errorMessage);
-            }
-            console.log("Adding event listeners to ", form, input);
+            var errorMessage = errorMessageElement(input);
             input.addEventListener('input', event => checkInputValidity(input, errorMessage));
             input.addEventListener('focusout', event => checkInputValidity(input, errorMessage));
         });
@@ -17,8 +22,7 @@ function prepareForms() {
         form.addEventListener('submit', (event) => {
             var valid = true;
             Array.from(form.elements).forEach((input) => {
-                var errorMessage = input.parentNode.querySelector('small');
-                if(!checkInputValidity(input, errorMessage)){
+                if(!checkInputValidity(input, errorMessageElement(input))){
                     valid = false;
                 }
             });
@@ -30,6 +34,8 @@ function prepareForms() {
         });
     });
 }
+
+
 
 function checkInputValidity(input, errorMessage) {
     if(input.type == "fieldset") return true;

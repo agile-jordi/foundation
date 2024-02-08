@@ -12,14 +12,23 @@
             </select>
         </label>
         <label class="pure-u-1-2">
-            Week
-            <input type="week" name="week" value="{{week}}">
+            Office
+            <label><input type="radio" name="office" value="Barcelona" required="required"> Barcelona </label>
+            <label><input type="radio" name="office" value="Berlin" required="required"> Berlin</label>
+            <label><input type="radio" name="office" value="Paris" required="required"> Paris</label>
         </label>
         </fieldset>
         <label for="timeEntries">
             Time Entries
-            <input required type="file" name="timeEntries">
+            <input required accept="text/csv" type="file" name="timeEntries">
             {{#if error}}<small class="error">{{error}}</small>{{/if}}
+        </label>
+        <label for="comment">
+            Comment
+            <textarea required name="comment" rows="3">{{comment}}</textarea>
+        </label>
+        <label>
+            <input type="checkbox" name="acceptConditions" value="true" required> Accept terms and conditions
         </label>
         <fieldset>
             <button type="submit" name="action">Submit</button>
