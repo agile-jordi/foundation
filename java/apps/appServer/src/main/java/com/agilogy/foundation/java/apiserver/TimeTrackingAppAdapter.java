@@ -66,21 +66,18 @@ public final class TimeTrackingAppAdapter {
             }
             final var status = e instanceof HttpException ? ((HttpException) e).status : 400;
             html(ctx, status, "uploadTimeEntriesForm.html", data);
-            ;
           }
         });
       });
-      path("/listTimeEntries", () -> {
-        get(ctx -> html(
-              ctx,
-              200,
-              "listTimeEntries.html",
-              Map.of(
-                    "timeEntries",
-                    timeTracking.listTimeEntries().stream().map(t -> t.roundToMinutes()).toList()
-              )
-        ));
-      });
+      path("/listTimeEntries", () -> get(ctx -> html(
+            ctx,
+            200,
+            "listTimeEntries.html",
+            Map.of(
+                  "timeEntries",
+                  timeTracking.listTimeEntries().stream().map(t -> t.roundToMinutes()).toList()
+            )
+      )));
     };
   }
 
