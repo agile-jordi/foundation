@@ -1,0 +1,9 @@
+<label class="{{labelClass}}">
+    {{label}}
+    <select {{#required}}required{{/required}} id="{{name}}" name="{{name}}">
+        <option value="" >{{selectLabel}}</option>
+        {{#each (lookup this values)}}
+            <option value="{{lookup this valueAttr}}" {{#eq (lookup .. name) (lookup this valueAttr)}}selected{{/eq}}>{{lookup this labelAttr}}</option>
+        {{/each}}
+    </select>
+</label>

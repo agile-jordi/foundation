@@ -32,10 +32,10 @@ public final class JavalinUtils {
   public static UploadedFile getFile(final @NotNull Context ctx, String fileName, String contentType) {
     var file = ctx.uploadedFile(fileName);
     if (file == null) {
-      throw new HttpException.ClientError("File " + fileName + " not found");
+      throw new HttpException.ValidationErrors(Map.of(fileName, "Required"));
     }
     if (!Objects.equals(file.contentType(), contentType)) {
-      throw new HttpException.ClientError("File " + fileName + " is not a " + contentType);
+      throw new HttpException.ValidationErrors(Map.of(fileName, "Not a valid file of type " + contentType));
     }
     return file;
   }

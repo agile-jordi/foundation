@@ -1,0 +1,4 @@
+<label>
+    <input type="radio" name="{{name}}" value="{{value}}" required="required" {{#eq (lookup this name) value}}checked{{/eq}}>
+    {{#if label}}{{label}}{{else}}{{value}}{{/if}}
+</label>

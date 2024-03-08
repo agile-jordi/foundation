@@ -2,26 +2,25 @@
     <!-- TODO: Try to generalize client side validation with https://developer.mozilla.org/en-US/docs/Learn/Forms/Form_validation -->
     <form novalidate class="col s12" action="uploadTimeEntries" method="POST" enctype="multipart/form-data">
         <fieldset class="pure-g">
-        <label class="pure-u-1-2">
-            Employee
-            <select required id="employeeId" name="employeeId">
-                <option value="" >Select an employee</option>
-                <option value="Jordi" {{#eq employeeId 'Jordi'}}selected{{/eq}}>Jordi</option>
-                <option value="Jose" {{#eq employeeId 'Jose'}}selected{{/eq}}>Jose</option>
-                <option value="Victor" {{#eq employeeId 'Victor'}}selected{{/eq}}>Victor</option>
-            </select>
-        </label>
-        <label class="pure-u-1-2">
-            Office
-            <label><input type="radio" name="office" value="Barcelona" required="required"> Barcelona </label>
-            <label><input type="radio" name="office" value="Berlin" required="required"> Berlin</label>
-            <label><input type="radio" name="office" value="Paris" required="required"> Paris</label>
-        </label>
+            {{> views/select
+                    required="true"
+                    label="Employee"
+                    labelClass="pure-u-1-2"
+                    name="employeeId"
+                    selectLabel="Select an employee"
+                    values="employees"
+                    valueAttr="id"
+                    labelAttr="label"
+            }}
+            <label class="pure-u-1-2">
+                Office
+                {{#offices}} {{> views/radio name="office" }} {{/offices}}
+            </label>
         </fieldset>
         <label for="timeEntries">
             Time Entries
             <input required accept="text/csv" type="file" name="timeEntries">
-            {{#if error}}<small class="error">{{error}}</small>{{/if}}
+            {{#if errors.timeEntries}}<small class="error">{{errors.timeEntries}}</small>{{/if}}
         </label>
         <label for="comment">
             Comment
