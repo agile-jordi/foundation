@@ -4,8 +4,19 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public interface TimeTracking {
+public class TimeTracking {
 
-  void addTimeEntries(final @NotNull List<TimeEntry> entries);
-  @NotNull List<TimeEntry> listTimeEntries();
+  private final @NotNull TimeEntriesRepository repository;
+
+  public TimeTracking(final @NotNull TimeEntriesRepository repository) {
+    this.repository = repository;
+  }
+
+  public final void addTimeEntries(final @NotNull List<TimeEntry> entries){
+    // TODO: Validate entries (e.g. that the entries are not overlapping)
+    repository.saveTimeEntries(entries);
+  }
+  public final @NotNull List<TimeEntry> listTimeEntries(){
+    return repository.listTimeEntries();
+  }
 }

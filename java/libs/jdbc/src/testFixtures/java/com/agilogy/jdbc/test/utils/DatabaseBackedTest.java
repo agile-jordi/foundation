@@ -2,13 +2,16 @@ package com.agilogy.jdbc.test.utils;
 
 import com.agilogy.jdbc.Database;
 import static com.agilogy.jdbc.HikariCP.getDataSource;
-import javautils.collections.CollectionsUtils;
+import static com.agilogy.jdbc.test.utils.ConsoleUtils.printAlignedTable;
+import javautils.ThrowingFunction;
+import javautils.ThrowingSupplier;
+import javautils.ThrowingConsumer;
 import static javautils.collections.CollectionsUtils.join;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.testcontainers.containers.PostgreSQLContainer;
-import static com.agilogy.jdbc.test.utils.ConsoleUtils.printAlignedTable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,12 +34,39 @@ public abstract class DatabaseBackedTest {
 
   @AfterAll
   static void afterAll() {
+    bracket(() -> db, Database::close, (db) -> postgres.stop());
+  }
+
+
+  private static <R> void bracket(
+        ThrowingSupplier<@NotNull R> acquire,
+        ThrowingConsumer<@NotNull R> use,
+        ThrowingConsumer<@NotNull R> release
+  ){
+
+  }
+  private static <R, A> A bracket(
+        ThrowingSupplier<@NotNull R> acquire,
+        ThrowingFunction<@NotNull R, A> use,
+        ThrowingConsumer<@NotNull R> release
+  ) {
+    final R resource = acquire.get();
     try {
-      db.close();
-    } catch (final Exception e) {
-      e.printStackTrace();
+      return use.apply(resource);
+    } catch (Throwable e) {
+      try {
+        release.accept(resource);
+      } catch (Throwable e2) {
+        e2.addSuppressed(e);
+        throw unchecked(e2);
+      }
+      throw unchecked(e);
     }
-    postgres.stop();
+  }
+
+  private static RuntimeException unchecked(Throwable e) {
+    if (e instanceof RuntimeException) return (RuntimeException) e;
+    return new RuntimeException(e);
   }
 
 

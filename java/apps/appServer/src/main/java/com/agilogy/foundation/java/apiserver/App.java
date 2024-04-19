@@ -1,5 +1,6 @@
 package com.agilogy.foundation.java.apiserver;
 
+import com.agilogy.foundation.java.domain.TimeEntriesRepository;
 import com.agilogy.foundation.java.domain.TimeEntry;
 import com.agilogy.foundation.java.domain.TimeTracking;
 import io.javalin.Javalin;
@@ -40,7 +41,7 @@ public class App {
   }
 
   @NotNull private static TimeTracking testTimeTracking() {
-    return new TimeTracking() {
+    final var repository = new TimeEntriesRepository() {
 
       private static final @NotNull List<TimeEntry> timeEntriesDemo = List.of(
             new TimeEntry(
@@ -59,7 +60,7 @@ public class App {
 
       private final @NotNull List<TimeEntry> entries = new LinkedList<>(timeEntriesDemo);
 
-      @Override public void addTimeEntries(final @NotNull List<TimeEntry> entries) {
+      @Override public void saveTimeEntries(List<TimeEntry> entries) {
         System.out.println("Adding time entries: " +
                            entries.stream().reduce("", (s, e) -> s + e.toString() + ", ", String::concat));
         this.entries.addAll(entries);
@@ -69,6 +70,7 @@ public class App {
         return List.copyOf(entries).stream().sorted(Comparator.comparing(TimeEntry::start)).toList();
       }
     };
+    return new TimeTracking(repository);
   }
 
 

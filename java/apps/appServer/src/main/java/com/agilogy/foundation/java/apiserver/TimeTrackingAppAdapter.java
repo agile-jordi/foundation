@@ -3,6 +3,7 @@ package com.agilogy.foundation.java.apiserver;
 import static com.agilogy.foundation.java.apiserver.TimeEntriesCsvReader.readTimeEntriesCsv;
 import com.agilogy.foundation.java.domain.Employee;
 import com.agilogy.foundation.java.domain.Office;
+import com.agilogy.foundation.java.domain.TimeEntry;
 import com.agilogy.foundation.java.domain.TimeTracking;
 import com.agilogy.javalin.HttpException;
 import static com.agilogy.javalin.JavalinUtils.formParamOrEmpty;
@@ -75,7 +76,7 @@ public final class TimeTrackingAppAdapter {
             "listTimeEntries.html",
             Map.of(
                   "timeEntries",
-                  timeTracking.listTimeEntries().stream().map(t -> t.roundToMinutes()).toList()
+                  timeTracking.listTimeEntries().stream().map(TimeEntry::roundToMinutes).toList()
             )
       )));
     };
