@@ -63,7 +63,7 @@ public final class TimeTrackingAppAdapter {
             if (e instanceof HttpException.ValidationErrors) {
               data.put("errors", ((HttpException.ValidationErrors) e).errors);
             } else if (e instanceof TimeEntriesCsvException) {
-              data.put("error", Map.of("timeEntries", "Not a valid CSV file"));
+              data.put("errors", Map.of("timeEntries", "Not a valid CSV file"));
             }
             final var status = e instanceof HttpException ? ((HttpException) e).status : 400;
             html(ctx, status, "uploadTimeEntriesForm.html", data);

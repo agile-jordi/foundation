@@ -14,20 +14,13 @@
             }}
             <label class="pure-u-1-2">
                 Office
-                {{#offices}} {{> views/radio name="office" }} {{/offices}}
+                {{#offices}} {{> views/radio name="office" value=id label=label }} {{/offices}}
             </label>
         </fieldset>
         <label for="timeEntries">
             Time Entries
             <input required accept="text/csv" type="file" name="timeEntries">
             {{#if errors.timeEntries}}<small class="error">{{errors.timeEntries}}</small>{{/if}}
-        </label>
-        <label for="comment">
-            Comment
-            <textarea required name="comment" rows="3">{{comment}}</textarea>
-        </label>
-        <label>
-            <input type="checkbox" name="acceptConditions" value="true" required> Accept terms and conditions
         </label>
         <fieldset>
             <button type="submit" name="action">Submit</button>
